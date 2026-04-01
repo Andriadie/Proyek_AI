@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fuzzy System | Optimasi Produksi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7f6;
+            color: #333;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+        }
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid #eee;
+            font-weight: 700;
+            padding: 1.5rem;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            border-radius: 10px;
+            transition: transform 0.2s;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(30, 60, 114, 0.3);
+        }
+        .result-box {
+            background-color: #eef2f7;
+            border-left: 5px solid #1e3c72;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .input-group-text {
+            background-color: #fff;
+            border-right: none;
+        }
+        .form-control {
+            border-left: none;
+        }
+        .form-control:focus {
+            box-shadow: none;
+            border-color: #ced4da;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-dark mb-5">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">
+                <i class="fas fa-microchip me-2"></i> Fuzzy Tsukamoto Engine
+            </span>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="text-center mb-4">
+                    <h2 class="fw-bold">Optimasi Target Produksi</h2>
+                    <p class="text-muted">Gunakan parameter Penjualan dan Stok untuk menghitung jumlah produksi ideal.</p>
+                </div>
+
+                <div class="card p-2">
+                    <div class="card-header text-primary">
+                        <i class="fas fa-edit me-2"></i> Input Parameter Real-Time
+                    </div>
+                    <div class="card-body">
+                        <form method="POST">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">Jumlah Penjualan</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-shopping-cart text-muted"></i></span>
+                                        <input type="number" step="any" name="penjualan" class="form-control" placeholder="Contoh: 95" required>
+                                    </div>
+                                    <div class="form-text">Rentang: 10 - 570 unit</div>
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+                                    <label class="form-label fw-semibold">Persediaan Stok</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-warehouse text-muted"></i></span>
+                                        <input type="number" step="any" name="stok" class="form-control" placeholder="Contoh: 1200" required>
+                                    </div>
+                                    <div class="form-text">Rentang: 250 - 1500 unit</div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid mt-2">
+                                <button type="submit" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-calculator me-2"></i> Jalankan Inferensi Fuzzy
+                                </button>
+                            </div>
+                        </form>
+
+                        {% if hasil %}
+                        <div class="mt-5 result-box animate__animated animate__fadeIn">
+                            <div class="d-flex align-items-center">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-check-circle fa-3x text-success"></i>
+                                </div>
+                                <div class="ms-4">
+                                    <h6 class="text-uppercase text-muted mb-1">Rekomendasi Produksi:</h6>
+                                    <h2 class="fw-bold mb-0 text-dark">{{ hasil }} <small class="text-muted" style="font-size: 0.5em;">Unit Pakaian</small></h2>
+                                </div>
+                            </div>
+                            <hr>
+                            <p class="mb-0 small text-muted">
+                                <i class="fas fa-info-circle me-1"></i> 
+                                Hasil ini dihitung menggunakan metode <strong>Tsukamoto</strong> berdasarkan 6 basis aturan aktif.
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="mt-4 text-center small text-muted">
+                    <p>&copy; 2026 Jurusan Sistem Informasi - Universitas Tanjungpura</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
